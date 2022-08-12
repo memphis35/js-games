@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Aleksandr Smirnov</title>
+	<script type="module" src="index.js"></script>
+	<script type="module" src="button.js"></script>
+	<script type="module" src="guess.js"></script>
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+	<nav>
+		<h2>Select the game</h2>
+		<ul>
+			<li>
+				<label>
+					<input type="radio" name="game" value="let-me-guess" checked/>
+					Let me guess?
+				</label>
+			</li>
+			<li>
+				<label>
+					<input type="radio" name="game" value="card-twins"/>
+					Card twins
+				</label>
+			</li>
+			<li>
+				<label>
+					<input type="radio" name="game" value="another-game"/>
+					Another game
+				</label>
+			</li>
+		</ul>
+	</nav>
+	<main>
+		<let-me-guess></let-me-guess>
+	</main>
+</body>
+</html>

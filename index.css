@@ -1,0 +1,24 @@
+body {
+	display: grid;
+	grid-template-columns: 20% 60% 20%;
+}
+
+nav {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	
+}
+
+li {
+	padding:  10px;
+}
