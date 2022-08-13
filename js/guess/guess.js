@@ -7,7 +7,6 @@ export class LetMeGuess extends LitElement {
 		super();
 		this.dashboard = new DashBoard();
 		this.settings = new GuessSettings(this);
-		this._elements = [1, 2, 3, 4, 5];
 	}
 
 	static styles = css`
@@ -60,16 +59,6 @@ export class LetMeGuess extends LitElement {
 			color: white;
 			font-size: xxx-large;
 		}
-
-		input[type=number], select {
-			all:unset;
-			-moz-appearance: textfield;
-			display: block;
-			width: 50px;
-			height: 50px;
-			text-align: center;
-			border: 2px solid gray;
-		}
 	`;
 
 	_getRandomInt(max) {
@@ -77,6 +66,7 @@ export class LetMeGuess extends LitElement {
 	}
 
 	checkResult(event) {
+
 		const result = Number.parseInt(event.target.textContent);
 		const isWinnning = this.settings.generateElementsToWin()
 		.some(i => i === result);
@@ -90,7 +80,7 @@ export class LetMeGuess extends LitElement {
 
 	changeCells(event) {
 		const count = Number.parseInt(event.target.value);
-		this._elements = [];
+		const elements = [];
 		const limit = count < 20 ? count : 20;
 		for (let i = 1; i <= limit; i++) {
 			this._elements.push(i);
@@ -99,18 +89,18 @@ export class LetMeGuess extends LitElement {
 	}
 
 	render() {
-		this._elements.length = 0;
+		const elements = [];
 		for (let i = 1; i <= this.settings.getMaxElements(); i++) {
-			this._elements.push(i);
+			elements.push(i);
 		};
-		this._numberToWin = this._getRandomInt(this._elements.length) + 1;
+		this._numberToWin = this._getRandomInt(elements.length) + 1;
 		return html`
 		<div class="gamebox">
 			<h1>"Let Me Guess?"</h1>
 			${this.settings}
 			${this.dashboard}
 			<ul>
-				${this._elements.map(e => html`<li @click="${this.checkResult}"><span class="number">${e}</span></li>`)}
+				${elements.map(e => html`<li @click="${this.checkResult}"><span class="number">${e}</span></li>`)}
 			</ul>
 		</div>
 		`;

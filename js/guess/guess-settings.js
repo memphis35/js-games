@@ -19,9 +19,9 @@ export class GuessSettings extends LitElement {
 		}
 
 		.settings {
-			width: 400px;
+			width: 550px;
 			display: grid;
-			grid-template-columns: 50% 50%;
+			grid-template-columns: 33% 33% 33%;
 		}
 
 		p {
@@ -39,32 +39,45 @@ export class GuessSettings extends LitElement {
 			font-size: xx-large;
 			display: flex;
 			justify-content: center;
-			align-items: center;
-			
+			align-items: center;	
+		}
+
+		button {
+			margin: 0;
+			padding: 10px;
+			width: 100px;
+			border: 2px solid gray;
+			border-radius: 10px;
+			justify-self: center;
+			transition: all 0.1s;
 		}
 
 		svg {
 			fill: lightgray;
-			transition: all 0.5s;
+			transition: all 0.2s;
 		}
 
-		svg:hover {
+		button:active {
+			transform: scale(0.95, 0.95);
+		}
+
+		svg:active {
 			transform: scale(0.8, 0.8);
 		}
 	`;
 
 	increaseElements() {
 		if (this.maxElements < 20) this.maxElements += 1;
-		this.shadowRoot.querySelector('#max-elements').textContent = this.maxElements;
+		this.shadowRoot.querySelector('#total-elements').textContent = this.maxElements;
 		this.game.requestUpdate();
 	}
 
 	decreaseElements() {
 		if (this.maxElements > 2) this.maxElements -= 1;
-		if (this.winningElements + 1 >= this.maxElements) {
+		if (this.maxElements <= this.winningElements) {
 			this.decreaseWinnings();
 		}
-		this.shadowRoot.querySelector('#max-elements').textContent = this.maxElements;
+		this.shadowRoot.querySelector('#total-elements').textContent = this.maxElements;
 		this.game.requestUpdate();
 	}
 
@@ -102,6 +115,15 @@ export class GuessSettings extends LitElement {
 		return this.maxElements;
 	}
 
+	reset() {
+		this.maxElements = 5;
+		this.winningElements = 1;
+		this.shadowRoot.querySelector('#total-elements').textContent = this.maxElements;
+		this.shadowRoot.querySelector('#winning-elements').textContent = this.winningElements;
+		this.game.requestUpdate();
+		this.requestUpdate();
+	}
+
 	render() {
 		return html`
 		<h2>Settings</h2>
@@ -110,7 +132,7 @@ export class GuessSettings extends LitElement {
 				<svg height="50" width="25" @click="${this.decreaseElements}">
   					<polygon points="25,0 25,50 0,25"/>
 	  			</svg>
-				<div id="max-elements" class="digit">${this.maxElements}</div>
+				<div id="total-elements" class="digit">${this.maxElements}</div>
 				<svg height="50" width="25" @click="${this.increaseElements}">
 	  				<polygon points="0,0 25,25 0,50"/>
 	  			</svg>
@@ -124,6 +146,7 @@ export class GuessSettings extends LitElement {
 	  				<polygon points="0,0 25,25 0,50"/>
 	  			</svg>
 			</div>
+			<button type="button" @click="${this.reset}">RESET</button>
 			<p>total elements</p>
 			<p>winning numbers</p>
 		</div>`;
