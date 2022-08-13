@@ -6,7 +6,8 @@ export class LetMeGuess extends LitElement {
 	constructor() {
 		super();
 		this.dashboard = new DashBoard();
-		this.settings = new GuessSettings(this);
+		this.settings = new GuessSettings(this, this.dashboard);
+		this.winnings = [];
 	}
 
 	static styles = css`
@@ -59,6 +60,14 @@ export class LetMeGuess extends LitElement {
 			color: white;
 			font-size: xxx-large;
 		}
+
+		.green {
+			color: green;
+		}
+
+		.hidden {
+			visibility: hidden;
+		}
 	`;
 
 	_getRandomInt(max) {
@@ -66,16 +75,19 @@ export class LetMeGuess extends LitElement {
 	}
 
 	checkResult(event) {
-
+		this.winnings = this.settings.generateElementsToWin();
+		this.requestUpdate();
 		const result = Number.parseInt(event.target.textContent);
-		const isWinnning = this.settings.generateElementsToWin()
-		.some(i => i === result);
+		const isWinnning = this.winnings.some(i => i === result);
 		if (isWinnning) {
 			this.dashboard.addWin();
 		} else {
 			this.dashboard.addLoss();
 		}
-		this.requestUpdate();
+		setTimeout(() => {
+			this.winnings.length = 0;
+			this.requestUpdate();
+		}, 1000);
 	}
 
 	changeCells(event) {
@@ -100,7 +112,15 @@ export class LetMeGuess extends LitElement {
 			${this.settings}
 			${this.dashboard}
 			<ul>
-				${elements.map(e => html`<li @click="${this.checkResult}"><span class="number">${e}</span></li>`)}
+				${elements.map(e => {
+						return html`
+						<li id="cell-${e}" @click="${this.checkResult}">
+							<span 
+								class="number ${this.winnings.some(i => i === e) ? 'green' : 'hidden'}">
+								${e}
+								</span>
+						</li>`;
+					})};
 			</ul>
 		</div>
 		`;

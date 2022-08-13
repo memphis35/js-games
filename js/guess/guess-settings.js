@@ -1,9 +1,10 @@
 import {LitElement, html, css} from 'lit';
 
 export class GuessSettings extends LitElement {
-	constructor(game) {
+	constructor(game, dashboard) {
 		super();
 		this.game = game;
+		this.dashboard = dashboard;
 		this.maxElements = 5;
 		this.winningElements = 1;
 	}
@@ -121,6 +122,7 @@ export class GuessSettings extends LitElement {
 		this.shadowRoot.querySelector('#total-elements').textContent = this.maxElements;
 		this.shadowRoot.querySelector('#winning-elements').textContent = this.winningElements;
 		this.game.requestUpdate();
+		this.dashboard.reset();
 		this.requestUpdate();
 	}
 

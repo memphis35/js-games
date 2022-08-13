@@ -74,6 +74,14 @@ export class DashBoard extends LitElement {
 		this.requestUpdate();
 	}
 
+	reset() {
+		this._wins = 0;
+		this._losses = 0;
+		this._count = 0;
+		this._ratio = 0;
+		this.requestUpdate();
+	}
+
 }
 
 window.customElements.define('dash-board', DashBoard);
