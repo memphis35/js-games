@@ -87,7 +87,7 @@ export class LetMeGuess extends LitElement {
 		setTimeout(() => {
 			this.winnings.length = 0;
 			this.requestUpdate();
-		}, 1000);
+		}, 600);
 	}
 
 	changeCells(event) {
