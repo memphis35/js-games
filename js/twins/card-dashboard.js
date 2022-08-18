@@ -50,6 +50,10 @@ export class CardDashboard extends LitElement {
         this.timer.start();
     }
 
+    stopTimer() {
+        this.timer.stop();
+    }
+
     render() {
         return html`
             <p>Pairs remained: ${this.remainingPairs}</p>
@@ -60,6 +64,10 @@ export class CardDashboard extends LitElement {
     decreaseRemaining() {
         this.remainingPairs -= 1;
         this.requestUpdate();
+    }
+
+    allMatched() {
+        return this.remainingPairs === 0;
     }
 }
 

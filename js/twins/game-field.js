@@ -3,8 +3,9 @@ import {MatchCard} from "./match-card";
 
 export class GameField extends LitElement {
 
-    constructor(dashboard, rows, cols) {
+    constructor(game, dashboard, rows, cols) {
         super();
+        this.game = game;
         this.dashboard = dashboard;
         this.rows = rows;
         this.cols = cols;
@@ -40,7 +41,12 @@ export class GameField extends LitElement {
         if (card instanceof MatchCard) {
             if (card.isOpened()) return;
             const matched = this.cardHolder.pushCard(card);
-            if (matched) this.dashboard.decreaseRemaining();
+            if (matched) {
+                this.dashboard.decreaseRemaining();
+            }
+        }
+        if (this.dashboard.allMatched()) {
+            this.game.stopGame();
         }
     }
 

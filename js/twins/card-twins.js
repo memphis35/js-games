@@ -8,7 +8,7 @@ class CardTwins extends LitElement {
     constructor() {
         super();
         this.gameStarted = false;
-        this.settings = new CardSettings();
+        this.settings = new CardSettings(this);
         this.dashboard = null;
         this.gameField = null;
     }
@@ -35,11 +35,17 @@ class CardTwins extends LitElement {
 
     startGame() {
         const totalCards = this.settings.rows * this.settings.columns;
+        this.settings.hide();
         this.dashboard = new CardDashboard(totalCards / 2);
-        this.gameField = new GameField(this.dashboard, this.settings.rows, this.settings.columns);
+        this.gameField = new GameField(this, this.dashboard, this.settings.rows, this.settings.columns);
         this.dashboard.startTimer();
         this.gameStarted = true;
         this.requestUpdate();
+    }
+
+    stopGame() {
+        this.dashboard.stopTimer();
+        this.settings.unhide();
     }
 
     render() {
@@ -47,7 +53,6 @@ class CardTwins extends LitElement {
             <div class="game-box">
                 <h1>Card Twins</h1>
                 ${this.settings}
-                <button type="button" ?hidden="${this.gameStarted}" @click="${this.startGame}">START GAME</button>
                 ${this.dashboard}
                 ${this.gameField}
             </div>
