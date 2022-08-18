@@ -66,7 +66,7 @@ export class MatchCard extends LitElement {
             setTimeout(() => {
                 this.unselect();
                 anotherCard.unselect();
-            }, 350);
+            }, 600);
             return false;
         }
     }
