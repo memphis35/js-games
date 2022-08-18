@@ -1,18 +1,32 @@
 import {html, LitElement} from "lit";
-import questionMark from "../../img/question-mark.jpg";
-import coin from "../../img/coin.jpg";
+
+import apple from "../../img/apple.jpg"
 import bomb from "../../img/bomb.jpg";
+import coin from "../../img/coin.jpg";
 import diamond from "../../img/diamond.jpg";
+import goblet from "../../img/goblet.jpg";
+import heart from "../../img/heart.jpg";
+import hourglass from "../../img/hourglass.jpg";
+import key from "../../img/key.jpg";
+import meat from "../../img/meat.jpg";
 import potion from "../../img/potion.jpg";
+import scroll from "../../img/scroll.jpg";
+import shield from "../../img/shield.jpg";
+import skull from "../../img/skull.jpg";
+import star from "../../img/star.jpg";
+import sword from "../../img/sword.jpg";
+import questionMark from "../../img/questionmark.jpg";
 
 export class MatchCard extends LitElement {
 
-    static IMAGES = [coin, bomb, diamond, potion];
+    static IMAGES = [
+        apple, bomb, coin, diamond, goblet,
+        heart, hourglass, key, meat, potion,
+        scroll, shield, skull, star, sword];
 
     constructor(id, gameField) {
         super();
         this.gameField = gameField;
-        this.cardId = `card-${id}`;
         this.image = MatchCard.IMAGES[id % 2 === 0 ? id / 2 : (id / 2) - 0.5];
         this.selected = false;
         this.matched = false;
@@ -60,8 +74,7 @@ export class MatchCard extends LitElement {
     render() {
         return html`
             <div>
-                <img src="${this.isOpened() ? this.image : questionMark}"
-                     alt="match-card"/>
+                <img src="${this.isOpened() ? this.image : questionMark}" alt="match-card"/>
             </div>`;
     }
 }

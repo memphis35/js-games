@@ -3,22 +3,20 @@ import {MatchCard} from "./match-card";
 
 export class GameField extends LitElement {
 
-    constructor() {
+    constructor(dashboard, rows, cols) {
         super();
-        this.quantity = 12;
-        this.cards = [...Array(this.quantity).keys()].map(id => new MatchCard(id));
+        this.dashboard = dashboard;
+        this.rows = rows;
+        this.cols = cols;
+        this.quantity = rows * cols;
+        const totalCards = this.shuffle([...Array(this.quantity).keys()].map(id => new MatchCard(id)));
+        this.cardsByRow = [...Array(this.rows).keys()].map(() => totalCards.splice(0, this.cols));
         this.cardHolder = new CardHolder();
     }
 
-    static properties = {
-        rows: {type: String},
-        columns: {type: String}
-    }
-
     static styles = css`
-        .field {
+        .row {
             display: flex;
-            flex-wrap: wrap;
         }
         
         match-card {
@@ -26,19 +24,29 @@ export class GameField extends LitElement {
         }
     `;
 
+    shuffle(generated) {
+        const original = [...generated];
+        const shuffled = [];
+        while (original.length > 0) {
+            const randomId = Math.floor(Math.random() * original.length);
+            shuffled.push(original[randomId]);
+            original.splice(randomId, 1);
+        }
+        return shuffled;
+    }
+
     cardSelected(event) {
         const card = event.target;
         if (card instanceof MatchCard) {
             if (card.isOpened()) return;
             const matched = this.cardHolder.pushCard(card);
+            if (matched) this.dashboard.decreaseRemaining();
         }
     }
 
     render() {
         return html`
-            <div class="field" @click="${this.cardSelected}">
-                ${this.cards}
-            </div>
+                ${this.cardsByRow.map(row => html`<div class="row" @click="${this.cardSelected}">${row}</div>`)}
         `
     }
 
