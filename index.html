@@ -1,41 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Aleksandr Smirnov</title>
-	<script type="module" src="index.js"></script>
-	<script type="module" src="./js/guess/guess.js"></script>
-	<script type="module" src="js/twins/card-twins.js"></script>
-	<script type="module" src="./js/clicker/clicker.js"></script>
-	<link rel="stylesheet" type="text/css" href="index.css">
-</head>
-<body>
-	<nav>
-		<h2>Select the game</h2>
-		<ul>
-			<li>
-				<label>
-					<input type="radio" name="game" value="let-me-guess" checked="checked"/>
-					Let me guess?
-				</label>
-			</li>
-			<li>
-				<label>
-					<input type="radio" name="game" value="card-twins"/>
-					Card twins
-				</label>
-			</li>
-			<li>
-				<label>
-					<input type="radio" name="game" value="point-clicker"/>
-					Point Clicker
-				</label>
-			</li>
-		</ul>
-	</nav>
-	<main>
-		<let-me-guess></let-me-guess>
-	</main>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Aleksandr Smirnov</title>
+        <script type="module" src="index.js"></script>
+        <script type="module" src="./js/guess/guess.js"></script>
+        <script type="module" src="js/twins/card-twins.js"></script>
+        <script type="module" src="./js/clicker/clicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="index.css">
+    </head>
+    <body>
+        <nav id="game-selector">
+            <select>
+                <option value="let-me-guess">let-me-guess</option>
+                <option value="card-twins">card-twins</option>
+                <option value="point-clicker">point-clicker</option>
+            </select>
+        </nav>
+        <main>
+            <let-me-guess></let-me-guess>
+        </main>
+        <a href="settings.html">go to settings</a>
+    </body>
 </html>

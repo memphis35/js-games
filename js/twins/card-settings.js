@@ -34,13 +34,16 @@ export class CardSettings extends LitElement {
         }
         
         select {
-            border:none;
+    
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
             -ms-appearance: none;
             
             display: block;
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
             text-align: center;
             font-size: x-large;
         }

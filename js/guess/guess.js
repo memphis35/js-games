@@ -18,10 +18,11 @@ export class LetMeGuess extends LitElement {
 			align-items: center;
 		}
 
-		.settings {
+		guess-settings {
 			display: flex;
 			width: 800px;
 			justify-content: center;
+			margin-top: 20px;
 		}
 
 		ul {
@@ -108,7 +109,6 @@ export class LetMeGuess extends LitElement {
 		this._numberToWin = this._getRandomInt(elements.length) + 1;
 		return html`
 		<div class="gamebox">
-			<h1>"Let Me Guess?"</h1>
 			${this.settings}
 			${this.dashboard}
 			<ul>

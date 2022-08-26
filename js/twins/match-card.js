@@ -22,7 +22,8 @@ export class MatchCard extends LitElement {
     static IMAGES = [
         apple, bomb, coin, diamond, goblet,
         heart, hourglass, key, meat, potion,
-        scroll, shield, skull, star, sword];
+        scroll, shield, skull, star, sword
+    ];
 
     constructor(id, gameField) {
         super();
@@ -57,12 +58,10 @@ export class MatchCard extends LitElement {
 
     matchCards(anotherCard) {
         if (this.image === anotherCard.image) {
-            console.log('matched!!!')
             this.markMatched();
             anotherCard.markMatched();
             return true;
         } else {
-            console.log('not matched!!!')
             setTimeout(() => {
                 this.unselect();
                 anotherCard.unselect();

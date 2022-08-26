@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Settings</title>
+        <style>
+            body {
+                width: 400px;
+                margin: 0 auto;
+                /*border: 1px solid black;*/
+            }
+
+            #settings {
+                display: grid;
+                grid-template-columns: 150px auto 150px;
+                grid-template-rows: 40px auto 50px auto;
+                column-gap: 5px;
+            }
+
+            #start-btn {
+                grid-column-start: 2;
+                grid-row-start: 2;
+                grid-row-end: span 4;
+            }
+
+            p, div {
+                font-size: x-large;
+                /*border: 1px solid blue;*/
+                margin: 0;
+                justify-self: center;
+            }
+
+            button {
+                all: unset;
+                margin: 0 auto;
+                padding: 10px 20px;
+                border: 2px solid gray;
+            }
+
+            button:active {
+                transform: scale(0.9, 0.9);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="settings">
+            <p>ROWS</p>
+            <p></p>
+            <button id="start-btn">GO!</button>
+            <p>COLS</p>
+            <button>
+                <svg width="80" height="35" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="0,35 80,35 40,0"/>
+                </svg>
+            </button>
+            <button>
+                <svg width="80" height="35" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="0,35 80,35 40,0"/>
+                </svg>
+            </button>
+            <p>2</p>
+            <p>5</p>
+            <button>
+                <svg width="80" height="35" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="0,0 80,0 40,35"/>
+                </svg>
+            </button>
+            <button>
+                <svg width="80" height="35" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="0,0 80,0 40,35"/>
+                </svg>
+            </button>
+        </div>
+    </body>
+</html>

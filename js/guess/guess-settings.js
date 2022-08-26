@@ -128,7 +128,6 @@ export class GuessSettings extends LitElement {
 
 	render() {
 		return html`
-		<h2>Settings</h2>
 		<div class="settings">
 			<div class="counter">
 				<svg height="50" width="25" @click="${this.decreaseElements}">
