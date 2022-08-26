@@ -20,9 +20,10 @@ export class GuessSettings extends LitElement {
 		}
 
 		.settings {
-			width: 550px;
+			width: 480px;
 			display: grid;
-			grid-template-columns: 33% 33% 33%;
+			grid-template-columns: 150px 150px 150px;
+			column-gap: 15px;
 		}
 
 		p {
@@ -147,7 +148,9 @@ export class GuessSettings extends LitElement {
 	  				<polygon points="0,0 25,25 0,50"/>
 	  			</svg>
 			</div>
-			<button type="button" @click="${this.reset}">RESET</button>
+			<div class="counter">
+				<button type="button" @click="${this.reset}">RESET</button>
+			</div>
 			<p>total elements</p>
 			<p>winning numbers</p>
 		</div>`;

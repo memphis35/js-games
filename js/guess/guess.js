@@ -26,9 +26,9 @@ export class LetMeGuess extends LitElement {
 		}
 
 		ul {
-			margin: 40px;
+			margin: 40px auto;
 			padding: 0;
-			width: 620px;
+			max-width: 480px;
 			display: flex;
 			justify-content: space-evenly;
 			flex-wrap: wrap;
@@ -42,8 +42,8 @@ export class LetMeGuess extends LitElement {
 			justify-content: center;
 			border: 2px solid gray;
 			border-radius: 10px;
-			height: 100px;
-			width: 100px;
+			height: 70px;
+			width: 70px;
 			transition: all 0.5s;
 		}
 
@@ -79,8 +79,8 @@ export class LetMeGuess extends LitElement {
 		this.winnings = this.settings.generateElementsToWin();
 		this.requestUpdate();
 		const result = Number.parseInt(event.target.textContent);
-		const isWinnning = this.winnings.some(i => i === result);
-		if (isWinnning) {
+		const isWinning = this.winnings.some(i => i === result);
+		if (isWinning) {
 			this.dashboard.addWin();
 		} else {
 			this.dashboard.addLoss();
@@ -120,7 +120,7 @@ export class LetMeGuess extends LitElement {
 								${e}
 								</span>
 						</li>`;
-					})};
+					})}
 			</ul>
 		</div>
 		`;

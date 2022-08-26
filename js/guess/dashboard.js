@@ -12,7 +12,7 @@ export class DashBoard extends LitElement {
 
 	static styles = css`
 		.dashboard {
-			width: 500px;
+			width: 480px;
 			display: flex;
 			justify-content: space-evenly;
 		}
@@ -22,11 +22,10 @@ export class DashBoard extends LitElement {
 			flex-direction: column;
 			align-items: center;
 			margin: 0 auto;
-			min-width: 250px;
 		}
 
 		span {
-			font-size: xx-large;
+			font-size: xxx-large;
 			font-weight: bold;
 		}
 
