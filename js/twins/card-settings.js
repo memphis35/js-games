@@ -18,44 +18,53 @@ export class CardSettings extends LitElement {
         }
         
         .settings {
+            width: 450px;
+            margin: 0 auto;
             display: flex;
-            align-items: center;
+            justify-content: space-evenly;
         }
         
-        label {
+        div, .digit-counter {
+            width: 100px;
             text-align: center;
         }
         
-        .select {
+        .digit-counter {
             display: flex;
             flex-direction: column;
-            width: 100px;
-            margin: 10px 20px;
         }
         
-        select {
-    
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            -ms-appearance: none;
-            
-            display: block;
-            height: 100px;
-            width: 100px;
-            border-radius: 50%;
-            text-align: center;
+        .digit p {
+            margin: 0;
+            padding: 10px;
+            font-size: xx-large;
+        }
+        
+        .start-btn-wrap {
+            padding-top: 50px;
+            display: flex;
+        }
+        
+        .start-btn, .action-btn {
+            background-color: white;
+            border: 2px solid gray;
+            border-radius: 10px;
+            transition: all 0.5s
             font-size: x-large;
         }
         
-        button {
-            unset: all;
-
-            margin: 20px;
-            height: 100px;
+        .start-btn {
             width: 100px;
-            border-radius: 50%;
         }
+        
+        .action-btn {
+            padding: 10px;
+        }
+        
+        .start-btn:active, .action-btn:active {
+            transform: scale(0.9, 0.9);
+        }
+        
     `;
 
     updateRows(event) {
@@ -83,23 +92,21 @@ export class CardSettings extends LitElement {
     render() {
         return html`
             <div id="settings" class="settings ?hidden=${this.hidden}">
-                <div class="select">
-                    <label for="rows">ROWS</label>
-                    <select id="rows" @change="${this.updateRows}">
-                        ${this.rowsArray.map(row => html`
-                            <option value="${row}" ?checked="${this.rows === row}">${row}</option>`)}
-                    </select>
+                <div class="digit-counter">
+                    <p>ROWS</p>
+                    <button type="button" class="action-btn"> +</button>
+                    <div class="digit"><p>2</p></div>
+                    <button type="button" class="action-btn"> -</button>
                 </div>
-                <div class="select">
-                    <label for="cols">COLS</label>
-                    <select id="cols" @change="${this.updateColumns}">
-                        ${this.colsArray
-                                .map(column => html`
-                                    <option value="${column}" ?checked="${column === this.columns}">${column}
-                                    </option>`)}
-                    </select>
+                <div class="start-btn-wrap">
+                    <button type="button" class="start-btn" @click="${this.startGame}">GO!</button>
                 </div>
-                <button type="button" @click="${this.startGame}">START</button>
+                <div class="digit-counter">
+                    <p>COLUMNS</p>
+                    <button type="button" class="action-btn"> +</button>
+                    <div class="digit"><p>2</p></div>
+                    <button type="button" class="action-btn"> -</button>
+                </div>
             </div>
         `
     }

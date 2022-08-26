@@ -24,10 +24,6 @@ class CardTwins extends LitElement {
 		    display: flex;
 		}
 		
-		img {
-		    padding: 10px;
-		}
-		
 		button {
 		    unset: all;
 		}
@@ -51,7 +47,6 @@ class CardTwins extends LitElement {
     render() {
         return html`
             <div class="game-box">
-                <h1>Card Twins</h1>
                 ${this.settings}
                 ${this.dashboard}
                 ${this.gameField}
