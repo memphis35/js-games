@@ -41,7 +41,7 @@ class CardTwins extends LitElement {
 
     stopGame() {
         this.dashboard.stopTimer();
-        this.settings.unhide();
+        this.settings.reveal();
     }
 
     render() {

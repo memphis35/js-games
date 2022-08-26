@@ -5,10 +5,10 @@ export class CardSettings extends LitElement {
     constructor(game) {
         super();
         this.game = game;
-        this.rowsArray = [2, 4, 6];
-        this.colsArray = [2, 3, 4, 5];
-        this.rows = this.rowsArray[0];
-        this.columns = this.colsArray[0];
+        this.rowsArray = new Counter([2, 4, 6, 8]);
+        this.colsArray = new Counter([2, 3, 4]);
+        this.rows = 2;
+        this.columns = 2;
         this.hidden = false;
     }
 
@@ -50,7 +50,6 @@ export class CardSettings extends LitElement {
             border: 2px solid gray;
             border-radius: 10px;
             transition: all 0.5s
-            font-size: x-large;
         }
         
         .start-btn {
@@ -67,12 +66,24 @@ export class CardSettings extends LitElement {
         
     `;
 
-    updateRows(event) {
-        this.rows = Number.parseInt(event.target.value);
+    increaseRows() {
+        this.rows = this.rowsArray.nextValue();
+        this.shadowRoot.querySelector('#rows').textContent = this.rows;
     }
 
-    updateColumns(event) {
-        this.columns = Number.parseInt(event.target.value);
+    decreaseRows() {
+        this.rows = this.rowsArray.previousValue()
+        this.shadowRoot.querySelector('#rows').textContent = this.rows;
+    }
+
+    increaseColumns() {
+        this.columns = this.colsArray.nextValue();
+        this.shadowRoot.querySelector('#cols').textContent = this.columns;
+    }
+
+    decreaseColumns() {
+        this.columns = this.colsArray.previousValue();
+        this.shadowRoot.querySelector('#cols').textContent = this.columns;
     }
 
     startGame() {
@@ -84,7 +95,7 @@ export class CardSettings extends LitElement {
         this.requestUpdate();
     }
 
-    unhide() {
+    reveal() {
         this.hidden = false;
         this.requestUpdate();
     }
@@ -94,20 +105,41 @@ export class CardSettings extends LitElement {
             <div id="settings" class="settings ?hidden=${this.hidden}">
                 <div class="digit-counter">
                     <p>ROWS</p>
-                    <button type="button" class="action-btn"> +</button>
-                    <div class="digit"><p>2</p></div>
-                    <button type="button" class="action-btn"> -</button>
+                    <button type="button" class="action-btn" @click="${this.increaseRows}"> + </button>
+                    <div class="digit"><p id="rows">2</p></div>
+                    <button type="button" class="action-btn" @click="${this.decreaseRows}"> - </button>
                 </div>
                 <div class="start-btn-wrap">
                     <button type="button" class="start-btn" @click="${this.startGame}">GO!</button>
                 </div>
                 <div class="digit-counter">
                     <p>COLUMNS</p>
-                    <button type="button" class="action-btn"> +</button>
-                    <div class="digit"><p>2</p></div>
-                    <button type="button" class="action-btn"> -</button>
+                    <button type="button" class="action-btn" @click="${this.increaseColumns}"> + </button>
+                    <div class="digit"><p id="cols">2</p></div>
+                    <button type="button" class="action-btn" @click="${this.decreaseColumns}"> - </button>
                 </div>
             </div>
         `
+    }
+
+}
+
+class Counter {
+    constructor(values) {
+        this._values = values;
+        this._limit = values.length - 1;
+        this._pointer = 0;
+    }
+
+    nextValue() {
+        const isOnLimit = (this._pointer === this._limit);
+        if (!isOnLimit) this._pointer += 1;
+        return this._values[this._pointer];
+    }
+
+    previousValue() {
+        const isOnZero = (this._pointer === 0);
+        if (!isOnZero) this._pointer -= 1;
+        return this._values[this._pointer];
     }
 }
