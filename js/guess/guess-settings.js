@@ -20,6 +20,7 @@ export class GuessSettings extends LitElement {
 		}
 
 		.settings {
+		// border: 1px solid blue;
 			width: 480px;
 			display: grid;
 			grid-template-columns: 150px 150px 150px;
@@ -37,21 +38,27 @@ export class GuessSettings extends LitElement {
 
 		.digit {
 			padding: 0 20px;
-			min-width: 50px;
-			font-size: xx-large;
+			font-size: 40px;
 			display: flex;
 			justify-content: center;
 			align-items: center;	
 		}
 
 		button {
-			margin: 0;
+			margin: 0 auto 20px;
 			padding: 10px;
 			width: 100px;
 			border: 2px solid gray;
 			border-radius: 10px;
 			justify-self: center;
 			transition: all 0.1s;
+		}
+		
+		.reset-button {
+		// border: 1px solid blue;
+			grid-column-start: 3;
+            grid-row-start: 1;
+            grid-row-end: span 2;
 		}
 
 		svg {
@@ -148,7 +155,7 @@ export class GuessSettings extends LitElement {
 	  				<polygon points="0,0 25,25 0,50"/>
 	  			</svg>
 			</div>
-			<div class="counter">
+			<div class="counter reset-button">
 				<button type="button" @click="${this.reset}">RESET</button>
 			</div>
 			<p>total elements</p>
